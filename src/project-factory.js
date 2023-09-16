@@ -1,3 +1,5 @@
-const projectFactory = (projectName, dueDate, priority) => {
+const createProject = (projectName, dueDate, priority) => {
   return {projectName, dueDate, priority};
 };
+
+export default createProject;
