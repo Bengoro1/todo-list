@@ -1,8 +1,23 @@
+import createTodo from "./todo-factory.js";
+import todos from "./index.js";
+
 const todoForm = () => {
   const content = document.querySelector('.content');
   const form = document.createElement('form');
   form.classList.add('todo-form');
+  form.setAttribute('method', 'get');
   content.appendChild(form);
+
+  const cancel = document.createElement('button');
+  cancel.textContent = '×';
+  cancel.classList.add('cancel-button');
+  cancel.setAttribute('type', 'button');
+  form.appendChild(cancel);
+  cancel.addEventListener('click', () => {
+    if (content.contains(form)) {
+      content.removeChild(form);
+    }
+  });
 
   const title = document.createElement('h1');
   title.textContent = 'Create to-do';

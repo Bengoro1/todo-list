@@ -1,8 +1,23 @@
+import createProject from "./project-factory.js";
+import projects from "./index.js";
+
 const projectForm = () => {
   const content = document.querySelector('.content');
   const form = document.createElement('form');
   form.classList.add('project-form');
+  form.setAttribute('method', 'get');
   content.appendChild(form);
+
+  const cancel = document.createElement('button');
+  cancel.textContent = '×';
+  cancel.classList.add('cancel-button');
+  cancel.setAttribute('type', 'button');
+  form.appendChild(cancel);
+  cancel.addEventListener('click', () => {
+    if (content.contains(form)) {
+      content.removeChild(form);
+    }
+  });
 
   const title = document.createElement('h1');
   title.textContent = 'Create project';
@@ -43,6 +58,12 @@ const projectForm = () => {
   submit.setAttribute('type', 'submit');
   submit.textContent = 'Add project';
   form.appendChild(submit);
+  submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    projects.push(createProject(nameInput.value, dueDateInput.value, priorityInput.value));
+    console.log(projects);
+    content.removeChild(form);
+  });
 }
 
 export default projectForm;
