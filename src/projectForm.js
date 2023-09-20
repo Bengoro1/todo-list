@@ -1,5 +1,6 @@
 import createProject from "./project-factory.js";
-import projects from "./index.js";
+import {projects} from "./index.js";
+import displayProject from "./display-project.js";
 
 const projectForm = () => {
   const content = document.querySelector('.content');
@@ -61,8 +62,10 @@ const projectForm = () => {
   submit.addEventListener('click', (e) => {
     e.preventDefault();
     projects.push(createProject(nameInput.value, dueDateInput.value, priorityInput.value));
-    console.log(projects);
-    content.removeChild(form);
+    displayProject();
+    if (content.contains(form)) {
+      content.removeChild(form);
+    }
   });
 }
 

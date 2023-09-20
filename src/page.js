@@ -19,15 +19,6 @@ export default function page() {
     }
   });
 
-  const addToDo = document.createElement('button');
-  addToDo.textContent = 'Create new to-do';
-  content.appendChild(addToDo);
-  addToDo.addEventListener('click', () => {
-    if(!document.querySelector('.todo-form')) {
-      todoForm();
-    }
-  });
-
   const footer = document.createElement('div');
   document.body.appendChild(footer);
   footer.classList.add('footer');
