@@ -1,7 +1,6 @@
-import {todos} from './index.js';
 import createTodo from "./todo-factory.js";
 
-const todoForm = () => {
+const todoForm = (arr) => {
   const content = document.querySelector('.content');
   const form = document.createElement('form');
   form.classList.add('todo-form');
@@ -70,7 +69,7 @@ const todoForm = () => {
   form.appendChild(submit);
   submit.addEventListener('click', (e) => {
     e.preventDefault();
-    todos.push(createTodo(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
+    arr.todos.push(createTodo(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
     if (content.contains(form)) {
       content.removeChild(form);
     }

@@ -18,7 +18,17 @@ export default function page() {
     }
   });
 
+  const projectContainer = document.createElement('div');
+  projectContainer.classList.add('project-container');
+  content.appendChild(projectContainer);
+
+  const todoContainer = document.createElement('div');
+  todoContainer.classList.add('todo-container');
+  content.appendChild(todoContainer);
+
   const footer = document.createElement('div');
   document.body.appendChild(footer);
   footer.classList.add('footer');
+
 }
+

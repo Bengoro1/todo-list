@@ -1,31 +1,31 @@
 import {projects} from './index.js';
-import todoForm from './todoForm.js';
+import displayTodos from './display-todos.js';
 
 export default function displayProject() {
-  const content = document.querySelector('.content');
-  while (content.childNodes.length > 1) {
-    content.removeChild(content.lastChild);
+  const projectContainer = document.querySelector('.project-container');
+  while (projectContainer.firstChild) {
+    projectContainer.removeChild(projectContainer.firstChild);
   }
   for (let i = 0; i < projects.length; i++) {
     const proj = document.createElement('div');
     proj.classList.add('project');
-    content.appendChild(proj);
+    projectContainer.appendChild(proj);
     const div = document.createElement('div');
     div.classList.add('project-title');
     div.textContent = projects[i].projectName;
     div.style.cursor = 'pointer';
     proj.appendChild(div);
     div.dataset.index = i;
-    div.addEventListener('click', () => { 
+    const remove = document.createElement('button');
+    remove.classList.add('remove-button');
+    remove.textContent = '×';
+    div.appendChild(remove);
+    remove.addEventListener('click', () => {
+      projects.splice(i, 1);
+      displayProject();
+    });
+    div.addEventListener('click', () => {
+      displayTodos(projects[i]);
     });
   }
-    
-  const addToDo = document.createElement('button');
-  addToDo.textContent = 'Create new to-do';
-  content.appendChild(addToDo);
-  addToDo.addEventListener('click', () => {
-    if(!document.querySelector('.todo-form')) {
-      todoForm();
-    }
-  });
 }

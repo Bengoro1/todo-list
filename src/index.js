@@ -7,9 +7,10 @@ export const projects = [];
 export const todos = [];
 
 page();
+
 //
-projects.push(createProject('a', 'b', 'c'));
-projects.push(createProject('hi', 'word', 'bro'));
-projects.push(createProject('yes', 'no', 'nvm'));
+projects.push(createProject('a', '2023-08-09', 'c'));
+projects.push(createProject('hi', '2021-1-5', 'bro'));
+projects.push(createProject('yes', '2027-9-12', 'nvm'));
 displayProject();
 //
