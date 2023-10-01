@@ -1,4 +1,4 @@
-import projectForm from './projectForm.js';
+import projectForm from './project-form.js';
 
 export default function page() {
   const header = document.createElement('div');

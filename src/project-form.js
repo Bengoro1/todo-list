@@ -1,9 +1,11 @@
-import createTodo from "./todo-factory.js";
+import createProject from "./project-factory.js";
+import displayProject from "./display-project.js";
 
-const todoForm = (arr) => {
+const projectForm = () => {
+  const arr = JSON.parse(localStorage.getItem('projects'));
   const content = document.querySelector('.content');
   const form = document.createElement('form');
-  form.classList.add('todo-form');
+  form.classList.add('project-form');
   form.setAttribute('method', 'get');
   content.appendChild(form);
 
@@ -19,29 +21,19 @@ const todoForm = (arr) => {
   });
 
   const title = document.createElement('h1');
-  title.textContent = 'Create to-do';
+  title.textContent = 'Create project';
   title.classList.add('title');
   form.appendChild(title);
 
   const nameLabel = document.createElement('label');
-  nameLabel.setAttribute('for', 'todo-name');
+  nameLabel.setAttribute('for', 'project-name');
   form.appendChild(nameLabel);
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
-  nameInput.id = 'todo-name';
-  nameInput.setAttribute('name', 'todo-name');
+  nameInput.id = 'project-name';
+  nameInput.setAttribute('name', 'project-name');
   form.appendChild(nameInput);
-
-  const descriptionLabel = document.createElement('label');
-  descriptionLabel.setAttribute('for', 'todo-description');
-  form.appendChild(descriptionLabel);
-
-  const descriptionInput = document.createElement('input');
-  descriptionInput.setAttribute('type', 'text');
-  descriptionInput.id = 'todo-description';
-  descriptionInput.setAttribute('name', 'todo-description');
-  form.appendChild(descriptionInput);
 
   const dueDateLabel = document.createElement('label');
   dueDateLabel.setAttribute('for', 'due-date');
@@ -65,15 +57,17 @@ const todoForm = (arr) => {
 
   const submit = document.createElement('button');
   submit.setAttribute('type', 'submit');
-  submit.textContent = 'Add to-do';
+  submit.textContent = 'Add project';
   form.appendChild(submit);
   submit.addEventListener('click', (e) => {
-    e.preventDefault();
-    arr.todos.push(createTodo(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
+    e.preventDefault();   
+    arr.push(createProject(nameInput.value, dueDateInput.value, priorityInput.value));
+    localStorage.setItem('projects', JSON.stringify(arr));
+    displayProject();
     if (content.contains(form)) {
       content.removeChild(form);
     }
   });
 }
 
-export default todoForm;
+export default projectForm;

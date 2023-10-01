@@ -1,11 +1,9 @@
-import createProject from "./project-factory.js";
-import {projects} from "./index.js";
-import displayProject from "./display-project.js";
+import createTodo from "./todo-factory.js";
 
-const projectForm = () => {
+const todoForm = (arr) => {
   const content = document.querySelector('.content');
   const form = document.createElement('form');
-  form.classList.add('project-form');
+  form.classList.add('todo-form');
   form.setAttribute('method', 'get');
   content.appendChild(form);
 
@@ -21,19 +19,29 @@ const projectForm = () => {
   });
 
   const title = document.createElement('h1');
-  title.textContent = 'Create project';
+  title.textContent = 'Create to-do';
   title.classList.add('title');
   form.appendChild(title);
 
   const nameLabel = document.createElement('label');
-  nameLabel.setAttribute('for', 'project-name');
+  nameLabel.setAttribute('for', 'todo-name');
   form.appendChild(nameLabel);
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
-  nameInput.id = 'project-name';
-  nameInput.setAttribute('name', 'project-name');
+  nameInput.id = 'todo-name';
+  nameInput.setAttribute('name', 'todo-name');
   form.appendChild(nameInput);
+
+  const descriptionLabel = document.createElement('label');
+  descriptionLabel.setAttribute('for', 'todo-description');
+  form.appendChild(descriptionLabel);
+
+  const descriptionInput = document.createElement('input');
+  descriptionInput.setAttribute('type', 'text');
+  descriptionInput.id = 'todo-description';
+  descriptionInput.setAttribute('name', 'todo-description');
+  form.appendChild(descriptionInput);
 
   const dueDateLabel = document.createElement('label');
   dueDateLabel.setAttribute('for', 'due-date');
@@ -57,16 +65,17 @@ const projectForm = () => {
 
   const submit = document.createElement('button');
   submit.setAttribute('type', 'submit');
-  submit.textContent = 'Add project';
+  submit.textContent = 'Add to-do';
   form.appendChild(submit);
   submit.addEventListener('click', (e) => {
     e.preventDefault();
-    projects.push(createProject(nameInput.value, dueDateInput.value, priorityInput.value));
-    displayProject();
+    arr.todos.push(createTodo(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
+    const array = JSON.parse(localStorage.getItem('projects'))
+    localStorage.setItem('projects', JSON.stringify(array));
     if (content.contains(form)) {
       content.removeChild(form);
     }
   });
 }
 
-export default projectForm;
+export default todoForm;
