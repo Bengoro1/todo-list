@@ -1,11 +1,13 @@
 import createTodo from "./todo-factory.js";
+import displayTodos from './display-todos.js';
 
-const todoForm = (arr) => {
-  const content = document.querySelector('.content');
+const todoForm = (i) => {
+  const array = JSON.parse(localStorage.getItem('projects'));
+  const todoContainer = document.querySelector('.todo-container');
   const form = document.createElement('form');
   form.classList.add('todo-form');
   form.setAttribute('method', 'get');
-  content.appendChild(form);
+  todoContainer.appendChild(form);
 
   const cancel = document.createElement('button');
   cancel.textContent = '×';
@@ -13,8 +15,8 @@ const todoForm = (arr) => {
   cancel.setAttribute('type', 'button');
   form.appendChild(cancel);
   cancel.addEventListener('click', () => {
-    if (content.contains(form)) {
-      content.removeChild(form);
+    if (todoContainer.contains(form)) {
+      todoContainer.removeChild(form);
     }
   });
 
@@ -53,15 +55,27 @@ const todoForm = (arr) => {
   dueDateInput.setAttribute('name', 'due-date');
   form.appendChild(dueDateInput);
 
-  const priorityLabel = document.createElement('label');
-  priorityLabel.setAttribute('for', 'priority');
-  form.appendChild(priorityLabel);
-
-  const priorityInput = document.createElement('input');
-  priorityInput.setAttribute('type', 'text');
-  priorityInput.id = 'priority';
-  priorityInput.setAttribute('name', 'priority');
-  form.appendChild(priorityInput);
+  const priority = document.createElement('button');
+  priority.id = 'priority';
+  form.appendChild(priority);
+  priority.textContent = 'Low';
+  priority.classList.add('low');
+  priority.setAttribute('type', 'button');
+  priority.addEventListener('click', () => {
+    if (priority.textContent === 'Low') {
+      priority.textContent = 'Medium';
+      priority.classList.add('medium');
+      priority.classList.remove('low');
+    } else if (priority.textContent === 'Medium') {
+      priority.textContent = 'High';
+      priority.classList.add('high');
+      priority.classList.remove('medium');
+    } else if (priority.textContent === 'High') {
+      priority.textContent = 'Low';
+      priority.classList.add('low');
+      priority.classList.remove('high');
+    }
+  });
 
   const submit = document.createElement('button');
   submit.setAttribute('type', 'submit');
@@ -69,11 +83,11 @@ const todoForm = (arr) => {
   form.appendChild(submit);
   submit.addEventListener('click', (e) => {
     e.preventDefault();
-    arr.todos.push(createTodo(nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value));
-    const array = JSON.parse(localStorage.getItem('projects'))
+    array[i].todos.push(createTodo(nameInput.value, descriptionInput.value, dueDateInput.value, priority.textContent));
     localStorage.setItem('projects', JSON.stringify(array));
-    if (content.contains(form)) {
-      content.removeChild(form);
+    displayTodos(i);
+    if (todoContainer.contains(form)) {
+      todoContainer.removeChild(form);
     }
   });
 }

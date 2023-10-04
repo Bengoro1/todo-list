@@ -45,15 +45,37 @@ const projectForm = () => {
   dueDateInput.setAttribute('name', 'due-date');
   form.appendChild(dueDateInput);
 
-  const priorityLabel = document.createElement('label');
-  priorityLabel.setAttribute('for', 'priority');
-  form.appendChild(priorityLabel);
+  const priority = document.createElement('button');
+  priority.id = 'priority';
+  form.appendChild(priority);
+  priority.textContent = 'Low';
+  priority.classList.add('low');
+  priority.setAttribute('type', 'button');
+  priority.addEventListener('click', () => {
+    if (priority.textContent === 'Low') {
+      priority.textContent = 'Medium';
+      priority.classList.add('medium');
+      priority.classList.remove('low');
+    } else if (priority.textContent === 'Medium') {
+      priority.textContent = 'High';
+      priority.classList.add('high');
+      priority.classList.remove('medium');
+    } else if (priority.textContent === 'High') {
+      priority.textContent = 'Low';
+      priority.classList.add('low');
+      priority.classList.remove('high');
+    }
+  });
 
-  const priorityInput = document.createElement('input');
-  priorityInput.setAttribute('type', 'text');
-  priorityInput.id = 'priority';
-  priorityInput.setAttribute('name', 'priority');
-  form.appendChild(priorityInput);
+  // const priorityLabel = document.createElement('label');
+  // priorityLabel.setAttribute('for', 'priority');
+  // form.appendChild(priorityLabel);
+
+  // const priorityInput = document.createElement('input');
+  // priorityInput.setAttribute('type', 'text');
+  // priorityInput.id = 'priority';
+  // priorityInput.setAttribute('name', 'priority');
+  // form.appendChild(priorityInput);
 
   const submit = document.createElement('button');
   submit.setAttribute('type', 'submit');
@@ -61,7 +83,7 @@ const projectForm = () => {
   form.appendChild(submit);
   submit.addEventListener('click', (e) => {
     e.preventDefault();   
-    arr.push(createProject(nameInput.value, dueDateInput.value, priorityInput.value));
+    arr.push(createProject(nameInput.value, dueDateInput.value, priority.textContent));
     localStorage.setItem('projects', JSON.stringify(arr));
     displayProject();
     if (content.contains(form)) {
