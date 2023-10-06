@@ -27,26 +27,32 @@ const todoForm = (i) => {
 
   const nameLabel = document.createElement('label');
   nameLabel.setAttribute('for', 'todo-name');
+  nameLabel.textContent = 'To-do name';
   form.appendChild(nameLabel);
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
   nameInput.id = 'todo-name';
   nameInput.setAttribute('name', 'todo-name');
+  nameInput.setAttribute('placeholder', '"My to-do"');
+  nameInput.setAttribute('maxlength', '40');
   form.appendChild(nameInput);
 
   const descriptionLabel = document.createElement('label');
   descriptionLabel.setAttribute('for', 'todo-description');
+  descriptionLabel.textContent = 'Description';
   form.appendChild(descriptionLabel);
 
   const descriptionInput = document.createElement('input');
   descriptionInput.setAttribute('type', 'text');
   descriptionInput.id = 'todo-description';
   descriptionInput.setAttribute('name', 'todo-description');
+  descriptionInput.setAttribute('placeholder', '"This is my to-do for My project"')
   form.appendChild(descriptionInput);
 
   const dueDateLabel = document.createElement('label');
   dueDateLabel.setAttribute('for', 'due-date');
+  dueDateLabel.textContent = 'Due Date';
   form.appendChild(dueDateLabel);
 
   const dueDateInput = document.createElement('input');
@@ -54,6 +60,10 @@ const todoForm = (i) => {
   dueDateInput.id = 'due-date';
   dueDateInput.setAttribute('name', 'due-date');
   form.appendChild(dueDateInput);
+
+  const priorityText = document.createElement('div');
+  priorityText.textContent = 'Priority';
+  form.appendChild(priorityText);
 
   const priority = document.createElement('button');
   priority.id = 'priority';

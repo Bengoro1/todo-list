@@ -12,9 +12,10 @@ export default function page() {
 
   const addProject = document.createElement('button');
   addProject.textContent = 'Create new project';
+  addProject.classList.add('create-project');
   content.appendChild(addProject);
   addProject.addEventListener('click', () => {
-    if(!document.querySelector('.project-form')) {
+    if(!document.querySelector('form')) {
       projectForm();
     }
   });

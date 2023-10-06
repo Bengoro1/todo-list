@@ -9,5 +9,7 @@ if (!localStorage.getItem('projects')) {
   localStorage.setItem('projects', JSON.stringify(arr));
 } else {
   displayProject();
+  const project = document.querySelectorAll('.project-title');
+  project[0].click();
 }
 

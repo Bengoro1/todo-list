@@ -12,10 +12,16 @@ export default function displayProject() {
     projectContainer.appendChild(proj);
     const div = document.createElement('div');
     div.classList.add('project-title');
-    div.textContent = arr[i].projectName;
+    arr[i].projectName === '' ? div.textContent = 'No name project' : div.textContent = arr[i].projectName;
     div.style.cursor = 'pointer';
+    if (arr[i].priority === 'Low') {
+      div.classList.add('low');
+    } else if (arr[i].priority === 'Medium') {
+      div.classList.add('medium');
+    } else if (arr[i].priority === 'High') {
+      div.classList.add('high');
+    }
     proj.appendChild(div);
-    div.dataset.index = i;
     const remove = document.createElement('button');
     remove.classList.add('remove-button');
     remove.textContent = '×';

@@ -27,16 +27,20 @@ const projectForm = () => {
 
   const nameLabel = document.createElement('label');
   nameLabel.setAttribute('for', 'project-name');
+  nameLabel.textContent = 'Project name';
   form.appendChild(nameLabel);
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
   nameInput.id = 'project-name';
   nameInput.setAttribute('name', 'project-name');
+  nameInput.setAttribute('placeholder', '"My project"');
+  nameInput.setAttribute('maxlength', '40');
   form.appendChild(nameInput);
 
   const dueDateLabel = document.createElement('label');
   dueDateLabel.setAttribute('for', 'due-date');
+  dueDateLabel.textContent = 'Due Date';
   form.appendChild(dueDateLabel);
 
   const dueDateInput = document.createElement('input');
@@ -44,6 +48,10 @@ const projectForm = () => {
   dueDateInput.id = 'due-date';
   dueDateInput.setAttribute('name', 'due-date');
   form.appendChild(dueDateInput);
+
+  const priorityText = document.createElement('div');
+  priorityText.textContent = 'Priority';
+  form.appendChild(priorityText);
 
   const priority = document.createElement('button');
   priority.id = 'priority';
@@ -66,16 +74,6 @@ const projectForm = () => {
       priority.classList.remove('high');
     }
   });
-
-  // const priorityLabel = document.createElement('label');
-  // priorityLabel.setAttribute('for', 'priority');
-  // form.appendChild(priorityLabel);
-
-  // const priorityInput = document.createElement('input');
-  // priorityInput.setAttribute('type', 'text');
-  // priorityInput.id = 'priority';
-  // priorityInput.setAttribute('name', 'priority');
-  // form.appendChild(priorityInput);
 
   const submit = document.createElement('button');
   submit.setAttribute('type', 'submit');
